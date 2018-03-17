@@ -4,21 +4,27 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 @Entity
-public class Rol implements Serializable {
-
-	private static final long serialVersionUID = 123321123L;
+public class Role implements Serializable{
+	
+	private static final long serialVersionUID = 890245234L;
 	
 	@Id
 	private int roleId;
+	
 	private String name;
+	
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<UserRole> userRoles = new HashSet<>();
 	
-	// CONSTRUCTOR
-	public Rol() {	}
+	public Role(){}
 
 	public int getRoleId() {
 		return roleId;
@@ -43,8 +49,6 @@ public class Rol implements Serializable {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-
-	// GET Y SETTERS
 	
 	
 }
